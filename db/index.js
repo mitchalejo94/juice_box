@@ -58,7 +58,7 @@ async function createTags(tagList) {
         `
         SELECT * FROM tags
         WHERE name 
-        IN (${selectValues};
+        IN (${selectValues});
       `,
       tagList
       );
@@ -180,12 +180,12 @@ async function updatePost(id, fields = {}) {
 
 async function getAllPosts() {
     try {
-        const { rows: postIds } = await client.query(`
+        const { rows: postId } = await client.query(`
           SELECT id
           FROM posts;
         `);
     
-        const posts = await Promise.all(postIds.map(
+        const posts = await Promise.all(postId.map(
           post => getPostById( post.id )
         ));
     
@@ -243,12 +243,12 @@ async function addTagsToPost(postId, tagList) {
 
 async function getPostsByUser(userId) {
   try {
-    const { rows } = await client.query(`
+    const { rows: postId } = await client.query(`
         SELECT id
         FROM posts
         WHERE "authorId"=${userId};
       `);
-      const posts = await Promise.all(postIds.map(
+      const posts = await Promise.all(postId.map(
         post => getPostById( post.id )
       ));
 
