@@ -216,20 +216,19 @@ async function getAllPosts() {
       }
     }
 
-    // async function getAllTags (){
+    async function getAllTags (){
 
-    //   try{
-    //     const {rows:tagId} = await client.query(`
-    //     SELECT * FROM tags;
-    //     `)
-    //     const tags = await Promise.all (tagId.map(
-    //       tag = getPostById (post.id)
-    //     ))
-    //     return tag
-    //   }catch (error){
-    //     throw error
-    //   }
-    // }
+      try{
+        const {rows:tags} = await client.query(`
+        SELECT * 
+        FROM tags;
+        `)
+    
+        return tags
+      }catch (error){
+        throw error
+      }
+    }
 
 async function getPostById(postId) {
     try {
@@ -238,6 +237,7 @@ async function getPostById(postId) {
         FROM posts
         WHERE id=$1;
       `, [postId]);
+      console.log(post, "post");
   
       const { rows: tags } = await client.query(`
         SELECT tags.*
@@ -326,5 +326,5 @@ module.exports = {
   getPostById,
   createTags,
   getPostsByTagName,
-  // getAllTags
+  getAllTags
 };
