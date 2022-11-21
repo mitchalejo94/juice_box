@@ -1,4 +1,4 @@
-const PORT = 3000;
+const PORT=3000 ;
 const express = require("express");
 const server = express();
 require ('dotenv').config()
@@ -22,6 +22,7 @@ client.connect();
 //     Number(req.params.first) + Number(req.params.second)
 //    }</h1>`);
 // });
+
 
 server.listen(PORT, () => {
   console.log("The server is up on port", PORT);
